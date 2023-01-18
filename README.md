@@ -1,7 +1,7 @@
 # pythonProject3
 
 ## About this Project
-This is a Python Mini Project that we are trying to build. Its a Personal Assistant named **BOB**.
+This is a Python Mini Project that we are trying to build. </br> Its a Personal Assistant named **BOB**.
 Bob can do a lot of things from greeting the user to opening apps. He is a great help to user to assist them in their day to day activities.
 
 ## Contributors
