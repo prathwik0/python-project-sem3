@@ -20,3 +20,7 @@ We used python inbuilt libraries to implement them.
 - Handsome
 - Replies Unlike Your Girl Friend
 - Giga Chad
+
+## Installing the libraries
+To install all the dependencies for this project, run the following:
+    "pip install ."
