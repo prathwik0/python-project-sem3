@@ -22,5 +22,5 @@ We used python inbuilt libraries to implement them.
 - Giga Chad
 
 ## Installing the libraries
-To install all the dependencies for this project, run the following:
+To install all the dependencies for this project, run the following:</br>
     "pip install ."
