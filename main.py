@@ -1,3 +1,6 @@
+from spotipy.oauth2 import SpotifyOAuth
+from spotipy import Spotify
+import spotipy
 import pyttsx3
 import datetime
 import speech_recognition as sr
@@ -7,6 +10,23 @@ import os
 import random
 import pyautogui
 import subprocess
+
+import subprocess
+track_name = "Shape of You"
+artist_name = "Ed Sheeran"
+subprocess.run(["osascript", "-e",
+               f'tell application "Spotify" to play track "{track_name}" of artist "{artist_name}"'])
+
+
+# clientId = 'e75d4692367e45f3b05f58230ec6b634'
+# clientSecret =
+# sp = spotipy.Spotify(auth_manager=SpotifyOAuth(client_id=clientId, client_secret=clientSecret,
+#                      redirect_uri='prathwik.fun', scope='user-modify-playback-state'))
+
+# access_token = SpotifyOAuth.parse_response_code('prathwik.fun')
+# track_id = '3n3Ppam7vgaVa1iaRUc9Lp'
+# # Start playing the track
+# sp.start_playback(uris=[f'spotify:track:{track_id}'])
 
 engine = pyttsx3.init()
 
@@ -36,7 +56,7 @@ def date():
 
 
 def wishme():
-    print("Welcome back sir!!")
+    print('Welcome back, sir!')
     speak("Welcome back")
 
     hour = datetime.datetime.now().hour
@@ -58,7 +78,7 @@ def wishme():
 
 def screenshot():
     img = pyautogui.screenshot()
-    img.save("C:\\Users\\KISHAN\\OneDrive\\Documents\\Jarvis 2.0\\ss3.png")
+    img.save('./ss.png')
 
 
 def takecommand():
@@ -90,9 +110,9 @@ def main():
         elif "date" in query:
             date()
 
-        # elif "who are you" in query:
-        #     speak("I'm bob. Here to help you!")
-        #     print("I'm bob. Here to help you!")
+        elif "who are you" in query:
+            speak("I'm bob. Here to help you!")
+            print("I'm bob. Here to help you!")
 
         elif "how are you" in query:
             speak("I'm fine sir, What about you?")
@@ -125,12 +145,27 @@ def main():
         elif "open stack overflow" in query:
             wb.open("stackoverflow.com")
 
-        elif "play music" in query:
+        elif "open spotify" in query:
             subprocess.run(["open", "-a", "Spotify"])
 
+        elif "play" in query:
+            subprocess.run(
+                ["osascript", "-e", 'tell application "Spotify" to play'])
+
+        elif "pause" in query:
+            subprocess.run(
+                ["osascript", "-e", 'tell application "Spotify" to pause'])
+
+        elif "next" in query:
+            subprocess.run(
+                ["osascript", "-e", 'tell application "Spotify" to next track'])
+
+        elif "previous" in query:
+            subprocess.run(
+                ["osascript", "-e", 'tell application "Spotify" to previous track'])
+
         elif "open chrome" in query:
-            chromePath = "C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe"
-            os.startfile(chromePath)
+            subprocess.run(["open", "-a", "Google Chrome"])
 
         elif "search on chrome" in query:
             try:
@@ -154,7 +189,7 @@ def main():
             remember.write(data)
             remember.close()
 
-        elif "remember anything" or "show my reminders" in query:
+        elif "show my reminders" in query:
             remember = open("data.txt", "r")
             speak("You told me to remember that" + remember.read())
             print("You told me to remember that " + str(remember))
