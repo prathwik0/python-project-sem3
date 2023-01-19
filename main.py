@@ -6,6 +6,7 @@ import webbrowser as wb
 import os
 import random
 import pyautogui
+import subprocess
 
 engine = pyttsx3.init()
 
@@ -49,10 +50,10 @@ def wishme():
         speak("Good Evening Sir!!")
         print("Good Evening Sir!!")
     else:
-        speak("Good Night Sir, See You Tommorrow")
+        speak("Good Night Sir!")
 
-    speak("Jarvis at your service, please tell me how may I help you.")
-    print("Jarvis at your service sir, please tell me how may I help you.")
+    speak("I'm bob. Here to help you!")
+    print("I'm bob. Here to help you!")
 
 
 def screenshot():
@@ -61,38 +62,37 @@ def screenshot():
 
 
 def takecommand():
-    # r = sr.Recognizer()
-    # with sr.Microphone() as source:
-    #     print("Listening...")
-    #     r.pause_threshold = 1
-    #     audio = r.listen(source)
+    r = sr.Recognizer()
+    with sr.Microphone() as source:
+        print("Listening...")
+        r.pause_threshold = 1
+        audio = r.listen(source)
 
-    # try:
-    #     print("Recognizing...")
-    #     query = r.recognize_google(audio, language="en-in")
-    #     print(query)
+    try:
+        print("Recognizing...")
+        query = r.recognize_google(audio, language="en-in")
+        print(query)
+        return query
 
-    # except Exception as e:
-    #     print(e)
-    #     speak("Please say that again")
-    #     return "Try Again"
-
-    return "who are you"
+    except Exception as e:
+        print(e)
+        speak("Please say that again")
+        return "Try Again"
 
 
-if __name__ == "__main__":
-    wishme()
+def main():
     while True:
         query = takecommand().lower()
+        print(query)
         if "time" in query:
             time()
 
         elif "date" in query:
             date()
 
-        elif "who are you" in query:
-            speak("I'm JARVIS created by Mr. Kishan and I'm a desktop voice assistant.")
-            print("I'm JARVIS created by Mr. Kishan and I'm a desktop voice assistant.")
+        # elif "who are you" in query:
+        #     speak("I'm bob. Here to help you!")
+        #     print("I'm bob. Here to help you!")
 
         elif "how are you" in query:
             speak("I'm fine sir, What about you?")
@@ -117,21 +117,16 @@ if __name__ == "__main__":
                 speak("Can't find this page sir, please ask something else")
 
         elif "open youtube" in query:
-            wb.open("youtube.com")
+            wb.open('https://www.youtube.com/')
 
         elif "open google" in query:
-            wb.open("google.com")
+            wb.open("https://www.google.com/")
 
         elif "open stack overflow" in query:
             wb.open("stackoverflow.com")
 
         elif "play music" in query:
-            song_dir = "C:\\Users\\KISHAN\\Music"
-            songs = os.listdir(song_dir)
-            print(songs)
-            x = len(songs)
-            y = random.randint(0, x)
-            os.startfile(os.path.join(song_dir, songs[y]))
+            subprocess.run(["open", "-a", "Spotify"])
 
         elif "open chrome" in query:
             chromePath = "C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe"
@@ -141,7 +136,7 @@ if __name__ == "__main__":
             try:
                 speak("What should I search?")
                 print("What should I search?")
-                chromePath = "C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe"
+                chromePath = "/Applications/Google Chrome.app"
                 search = takecommand()
                 wb.get(chromePath).open_new_tab(search)
                 print(search)
@@ -159,7 +154,7 @@ if __name__ == "__main__":
             remember.write(data)
             remember.close()
 
-        elif "do you remember anything" in query:
+        elif "remember anything" or "show my reminders" in query:
             remember = open("data.txt", "r")
             speak("You told me to remember that" + remember.read())
             print("You told me to remember that " + str(remember))
@@ -170,3 +165,7 @@ if __name__ == "__main__":
 
         elif "offline" in query:
             quit()
+
+
+if __name__ == "__main__":
+    main()
