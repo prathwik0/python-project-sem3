@@ -1,6 +1,6 @@
-from spotipy.oauth2 import SpotifyOAuth
-from spotipy import Spotify
-import spotipy
+# from spotipy.oauth2 import SpotifyOAuth
+# from spotipy import Spotify
+# import spotipy
 import pyttsx3
 import datetime
 import speech_recognition as sr
@@ -11,12 +11,10 @@ import random
 import pyautogui
 import subprocess
 
-import subprocess
-track_name = "Shape of You"
-artist_name = "Ed Sheeran"
-subprocess.run(["osascript", "-e",
-               f'tell application "Spotify" to play track "{track_name}" of artist "{artist_name}"'])
-
+# track_name = "Shape of You"
+# artist_name = "Ed Sheeran"
+# subprocess.run(["osascript", "-e",
+#                f'tell application "Spotify" to play track "{track_name}" of artist "{artist_name}"'])
 
 # clientId = 'e75d4692367e45f3b05f58230ec6b634'
 # clientSecret =
@@ -101,6 +99,7 @@ def takecommand():
 
 
 def main():
+    wishme()
     while True:
         query = takecommand().lower()
         print(query)
@@ -129,7 +128,18 @@ def main():
         elif "wikipedia" in query:
             try:
                 speak("Ok wait sir, I'm searching...")
-                query = query.replace("wikipedia", "")
+                query = query.replace('wikipedia', '')
+                result = wikipedia.summary(query, sentences=2)
+                print(result)
+                speak(result)
+            except:
+                speak("Can't find this page sir, please ask something else")
+
+        elif "what" in query:
+            try:
+                speak("Ok wait sir, I'm searching...")
+                query = query.replace('what', '')
+                query = query.replace('is', '')
                 result = wikipedia.summary(query, sentences=2)
                 print(result)
                 speak(result)
@@ -167,14 +177,13 @@ def main():
         elif "open chrome" in query:
             subprocess.run(["open", "-a", "Google Chrome"])
 
-        elif "search on chrome" in query:
+        elif "search" in query:
             try:
-                speak("What should I search?")
-                print("What should I search?")
-                chromePath = "/Applications/Google Chrome.app"
-                search = takecommand()
-                wb.get(chromePath).open_new_tab(search)
+                search = query.replace('search', '')
+                search = search.replace('for', '')
                 print(search)
+                search = search.replace(' ', '+')
+                wb.open(f"https://www.google.com/search?q={search}")
 
             except Exception as e:
                 speak("Can't open now, please try again later.")
