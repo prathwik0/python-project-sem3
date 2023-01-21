@@ -54,9 +54,6 @@ def date():
 
 
 def wishme():
-    print('Welcome back, sir!')
-    speak("Welcome back")
-
     hour = datetime.datetime.now().hour
     if hour >= 4 and hour < 12:
         speak("Good Morning Sir!!")
@@ -79,27 +76,27 @@ def screenshot():
     img.save('./ss.png')
 
 
-# def takecommand():
-#     r = sr.Recognizer()
-#     with sr.Microphone() as source:
-#         print("Listening...")
-#         r.pause_threshold = 1
-#         audio = r.listen(source)
-
-#     try:
-#         print("Recognizing...")
-#         query = r.recognize_google(audio, language="en-in")
-#         print(query)
-#         return query
-
-#     except Exception as e:
-#         print(e)
-#         speak("Please say that again")
-#         return "Try Again"
-
 def takecommand():
-    n = input("enter string: ")
-    return n
+    r = sr.Recognizer()
+    with sr.Microphone() as source:
+        print("Listening...")
+        r.pause_threshold = 1
+        audio = r.listen(source)
+
+    try:
+        print("Recognizing...")
+        query = r.recognize_google(audio, language="en-in")
+        print(query)
+        return query
+
+    except Exception as e:
+        print(e)
+        # speak("Please say that again")
+        return "Try Again"
+
+# def takecommand():
+#     n = input("enter string: ")
+#     return n
 
 
 def main():
@@ -116,6 +113,18 @@ def main():
         elif "who are you" in query:
             speak("I'm bob. Here to help you!")
             print("I'm bob. Here to help you!")
+
+        elif "hello" in query:
+            speak("Hello, I'm bob. I am here to help you!")
+            print("Hello, I'm bob. Here to help you!")
+
+        elif "hi" in query:
+            speak("Hello, I'm bob. I am here to help you!")
+            print("Hello, I'm bob. Here to help you!")
+
+        elif "what's up" in query:
+            speak("Nothing much sir")
+            print("Nothing much sir")
 
         elif "how are you" in query:
             speak("I'm fine sir, What about you?")
@@ -156,13 +165,17 @@ def main():
         elif "open google" in query:
             wb.open("https://www.google.com/")
 
-        elif "open stack overflow" in query:
+        elif "overflow" in query:
             wb.open("stackoverflow.com")
 
         elif "open spotify" in query:
             subprocess.run(["open", "-a", "Spotify"])
 
         elif "play" in query:
+            subprocess.run(
+                ["osascript", "-e", 'tell application "Spotify" to play'])
+
+        elif "resume" in query:
             subprocess.run(
                 ["osascript", "-e", 'tell application "Spotify" to play'])
 
