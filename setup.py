@@ -6,11 +6,9 @@ setup(
     install_requires=[
         'pyttsx3',
         'datetime',
-        'speech_recognition',
+        'SpeechRecognition',
         'wikipedia',
-        'webbrowser',
-        'os',
-        'random',
+        'os-sys',
         'pyautogui'
     ],
 )
