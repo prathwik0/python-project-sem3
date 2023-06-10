@@ -1,6 +1,3 @@
-# from spotipy.oauth2 import SpotifyOAuth
-# from spotipy import Spotify
-# import spotipy
 import pyttsx3
 import datetime
 import speech_recognition as sr
@@ -10,21 +7,6 @@ import os
 import random
 import pyautogui
 import subprocess
-
-# track_name = "Shape of You"
-# artist_name = "Ed Sheeran"
-# subprocess.run(["osascript", "-e",
-#                f'tell application "Spotify" to play track "{track_name}" of artist "{artist_name}"'])
-
-# clientId = 'e75d4692367e45f3b05f58230ec6b634'
-# clientSecret =
-# sp = spotipy.Spotify(auth_manager=SpotifyOAuth(client_id=clientId, client_secret=clientSecret,
-#                      redirect_uri='prathwik.fun', scope='user-modify-playback-state'))
-
-# access_token = SpotifyOAuth.parse_response_code('prathwik.fun')
-# track_id = '3n3Ppam7vgaVa1iaRUc9Lp'
-# # Start playing the track
-# sp.start_playback(uris=[f'spotify:track:{track_id}'])
 
 engine = pyttsx3.init()
 
